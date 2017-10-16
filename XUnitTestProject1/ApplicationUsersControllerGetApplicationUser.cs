@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using TestServerPOC;
 using Xunit;
 using Microsoft.AspNetCore.TestHost;
+using Newtonsoft.Json;
 using TestServerPOC.Data;
 using TestServerPOC.Models;
 
@@ -42,7 +43,8 @@ namespace XUnitTestProject1
             // Arrange
             var user = new ApplicationUser
             {
-                Id = "123"
+                Id = "123",
+                Email = "test@test.com"
             };
 
             _context.Users.Add(user);
@@ -53,6 +55,10 @@ namespace XUnitTestProject1
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            string jsonResult = await response.Content.ReadAsStringAsync();
+            ApplicationUser userFromJson = JsonConvert.DeserializeObject<ApplicationUser>(jsonResult);
+            Assert.Equal(user.Id, userFromJson.Id);
+            Assert.Equal(user.Email, userFromJson.Email);
         }
     }
 }

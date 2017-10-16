@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TestServerPOC\TestServerPOC.csproj" />
+    <ProjectReference Include="..\TestServerPOC\TestServerInMemoryDbPOC.csproj" />
   </ItemGroup>
 
 </Project>
